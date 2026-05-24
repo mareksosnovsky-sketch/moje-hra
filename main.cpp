@@ -4,7 +4,26 @@
 struct Utok {
     std::string jmeno;
     int poskozeni;
-    int cena_utoku; // UBERE MANU
+    int cena_utoku; // Sebrani many
+};
+
+struct Monstrum {
+    std::string jmeno;
+    int max_zivoty;
+    int akt_zivoty;
+
+
+    Utok hlavniUtok;
+    Utok sekundarniUtok;
+
+
+    void vypisKartu() {
+        std::cout << "=== " << jmeno << " (Monstrum) ===\n";
+        std::cout << " Zivoty: " << akt_zivoty << " / " << max_zivoty << "\n";
+        std::cout << "   " << hlavniUtok.jmeno << " (" << hlavniUtok.poskozeni << " DMG)\n";
+        std::cout << "   " << sekundarniUtok.jmeno << " (" << sekundarniUtok.poskozeni << " DMG)\n";
+        std::cout << "==========================\n\n";
+    }
 };
 
 struct Postava {
@@ -17,7 +36,6 @@ struct Postava {
     int lvl;
     int xp;
     int utok;
-
 
     Utok hlavniUtok;
     Utok sekundarniUtok;
@@ -35,6 +53,26 @@ struct Postava {
 
 int main() {
 
+    Monstrum Goblin = {
+        "Goblin",
+        45, 45,
+        {"Bodnuti dykou", 6, 0},
+        {"Skrabnuti", 3, 0}
+    };
+
+    Monstrum KamennyGolem = {   // mini boss
+        "Kamenny Golem (Mini Boss)",
+        150, 150,
+        {"Rozdrceni pesti", 14, 0},
+        {"Hod balvanem", 22, 0}
+    };
+
+    Monstrum StinovyLovec = {  // mini boss
+        "Stinovy Lovec (Mini Boss)",
+        110, 110,
+        {"Seknuti ze zalohy", 16, 0},
+        {"Temny sip", 26, 0}
+    };
 
     Postava mag = {
         "Gandalf",
@@ -45,7 +83,6 @@ int main() {
         {"Fireball", 15, 7}
     };
 
-
     Postava Rytir = {
         "Rytir",
         125, 125, // zivoty
@@ -55,9 +92,8 @@ int main() {
         {"Svizne seknuti", 15, 5}
     };
 
-
     Postava Ninja = {
-        "Ninja",     // Tady chybìla èárka!
+        "Ninja",
         100, 100,    // zivoty
         20, 20,      // mana
         50, 1, 0, 5, // penize , lvl , xp , zakladni utok
@@ -66,9 +102,14 @@ int main() {
     };
 
 
-    mag.vypisKartu();
+    mag.vypisKartu();//kontrola vypisu hrdinu
     Rytir.vypisKartu();
     Ninja.vypisKartu();
+
+
+    Goblin.vypisKartu(); //kontrola vypisu monster
+    KamennyGolem.vypisKartu();
+    StinovyLovec.vypisKartu();
 
     return 0;
 }
